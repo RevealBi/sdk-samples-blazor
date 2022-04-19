@@ -16,8 +16,8 @@ To test the Reveal SDK client, we ship test dashboards.  Reveal uses a known fol
 
 1. Create a folder named `Dashboards`
 2. Copy the sample dashboards (Marketing, Sales, Campaigns, Manufacturing) to that folder from one of these locations:
-	a.    `%public documents%\Infragistics\Reveal\SDK\Web\Sample\Reveal.Sdk.Samples.Web.UpMedia\Dashboards`
-	b. [https://users.infragistics.com/Reveal/sample-dashboards.zip](https://users.infragistics.com/Reveal/sample-dashboards.zip)
+	1. `%public documents%\Infragistics\Reveal\SDK\Web\Sample\Reveal.Sdk.Samples.Web.UpMedia\Dashboards`
+	2. [https://users.infragistics.com/Reveal/sample-dashboards.zip](https://users.infragistics.com/Reveal/sample-dashboards.zip)
 
 ### Step 4 - Update Program.cs
 In `Program.cs`:
