@@ -83,11 +83,10 @@ window.loadRevealView = function (viewId, dashboardName) {
 	$.ig.RevealSdkSettings.setBaseUrl('https://samples.revealbi.io/upmedia-backend/reveal-api/');    
 	
 	$.ig.RevealSdkSettings.ensureFontsLoadedAsync().then(
-
-        $.ig.RVDashboard.loadDashboard(dashboardName, (dashboard) => {
-            console.log(dashboard);
-            var revealView = new $.ig.RevealView("#" + viewId);
-            revealView.dashboard = dashboard;
+        	$.ig.RVDashboard.loadDashboard(dashboardName, (dashboard) => {
+            	console.log(dashboard);
+            	var revealView = new $.ig.RevealView("#" + viewId);
+            	revealView.dashboard = dashboard;
         })
     );
 }
@@ -115,7 +114,7 @@ In this Blazor application, you are going to load the dashboards into a `<div>` 
 
 3. Add the revealView div:
 	```html
-	<div id="revealView" style="width:100%; height:800px"></div>
+	<div id="revealView" style="width:100%; height:750px"></div>
 	```
 
 4. Add code that loads the Campaigns dashboard on first load
