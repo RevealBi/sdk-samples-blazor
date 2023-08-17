@@ -64,31 +64,25 @@ The Reveal SDK Client uses is configured through the RevealView.  To load the Re
 1. Add `js` folder in the ``\wwwroot\` folder
 	``2. In the `js` folder, add a JavaScript file named `revealview.js` with the following code:
 	```js
-	window.loadRevealView = function (viewId, dashboardName) {
-	    $.ig.RevealSdkSettings.ensureFontsLoadedAsync().then(
-
+	window.loadRevealView = function (viewId, dashboardName) {	   
 	        $.ig.RVDashboard.loadDashboard(dashboardName, (dashboard) => {
 	            console.log(dashboard);
 	            var revealView = new $.ig.RevealView("#" + viewId);
 	            revealView.dashboard = dashboard;
-	        })
-	    );
+	        });
 	}
 	```
 
-If you are not implementing your own server, or the server exists outside of this application, you can use the `setBaseUrl` function in the `loadRevealView` function. Your code would optionally look like this:
+If the server exists outside of this application, like a Blazor WASM app, you can use the `setBaseUrl` function in the `loadRevealView` function. Your code would optionally look like this:
 
 ```js
 window.loadRevealView = function (viewId, dashboardName) {
 	$.ig.RevealSdkSettings.setBaseUrl('https://samples.revealbi.io/upmedia-backend/reveal-api/');    
-	
-	$.ig.RevealSdkSettings.ensureFontsLoadedAsync().then(
         	$.ig.RVDashboard.loadDashboard(dashboardName, (dashboard) => {
             	console.log(dashboard);
             	var revealView = new $.ig.RevealView("#" + viewId);
             	revealView.dashboard = dashboard;
-        })
-    );
+        });
 }
 ```
 
