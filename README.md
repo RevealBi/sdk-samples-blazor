@@ -21,24 +21,27 @@ To test the Reveal SDK client, we ship test dashboards.  Reveal uses a known fol
 
 ### Step 4 - Update Program.cs
 In `Program.cs`:
+
 1. Add to the top of the code window:
-	```
-	using Reveal.Sdk;
-	```
+```
+using Reveal.Sdk;
+```
+
 3. Tell your app to use the Reveal SDK with this code, make sure to place it before the `builder.build` statement.
-	```
-	 builder.Services.AddControllers().AddReveal();
-	```
+```
+ builder.Services.AddControllers().AddReveal();
+```
+
 5. Add the following for correct routing before the `app.run` at the bottom of the `Program.cs`
-	```c
-	// Required for Reveal
-	app.UseEndpoints(endpoints =>
-	{
-	    endpoints.MapControllerRoute(
-	    name: "default",
-	    pattern: "{controller=Home}/{action=Index}/{id?}");
-	});
-	```
+```c
+// Required for Reveal
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+```
 
 ### Step 5 - Add Client SDK Dependencies
 To enable Reveal client JavaScript dependencies, the `Pages\_layout.cshtml` file needs to be updated. Add the following code before the end of the closing `</Body>` tag.  If you started with a Blazor Server app, you would add this to the index.html file in wwwroot folder.
@@ -66,15 +69,16 @@ Next, add the dependency for the CSS file for Quill.js in the <head> tag:
 The Reveal SDK Client uses is configured through the RevealView.  To load the RevealView, you need to add a JavaScript function on the client.  This is also where you would configure any properties that should be enabled when a dashboard renders.
 
 1. Add `js` folder in the ``\wwwroot\` folder
-	``2. In the `js` folder, add a JavaScript file named `revealview.js` with the following code:
-	```js
+2. In the `js` folder, add a JavaScript file named `revealview.js` with the following code:
+
+ ```js
 window.loadRevealView = function (viewId, dashboardName) {
     $.ig.RVDashboard.loadDashboard(dashboardName).then(dashboard => {
         var revealView = new $.ig.RevealView("#" + viewId);
         revealView.dashboard = dashboard;
     });
 }
-	```
+```
 
 If the server exists outside of this application, like a Blazor WASM app, you can use the `setBaseUrl` function in the `loadRevealView` function. Your code would optionally look like this:
 
@@ -93,46 +97,46 @@ In this Blazor application, you are going to load the dashboards into a `<div>` 
 
 1. In `Pages\Index.Razor`, add this using statement:
 
-	```html
-	@inject IJSRuntime JSRuntime
-	```
+```html
+@inject IJSRuntime JSRuntime
+```
 
 2. Add the code for the dropdown that you’ll use to selected the dashboard to load:
-	```html
-	<select @onchange="selectedDashboardChanged">
-	    <option>Campaigns</option>
-	    <option>Healthcare</option>
-	    <option>Manufacturing</option>
-	    <option>Marketing</option>
-	    <option>Sales</option>
-	</select>
-	```
+```html
+<select @onchange="selectedDashboardChanged">
+    <option>Campaigns</option>
+    <option>Healthcare</option>
+    <option>Manufacturing</option>
+    <option>Marketing</option>
+    <option>Sales</option>
+</select>
+```
 
 3. Add the revealView div:
-	```html
-	<div id="revealView" style="width:100%; height:750px"></div>
-	```
+```html
+<div id="revealView" style="height: calc(100vh - 30px); width: 100%; position:relative;" ></div>
+```
 
 4. Add code that loads the Campaigns dashboard on first load
-	```c
-	@code {
-	    protected override async Task OnAfterRenderAsync(bool firstRender)
-	    {
-	        if (firstRender)
-	        {
-	            await JSRuntime.InvokeVoidAsync("loadRevealView", "revealView", "Campaigns");
-	        }
-	    }
-	```
+```c
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("loadRevealView", "revealView", "Campaigns");
+        }
+    }
+```
 
 5. Watch for changes in the Select to load the correct dashboard:
-	```c
-	async void selectedDashboardChanged(ChangeEventArgs e)
-	    {
-	        await JSRuntime.InvokeVoidAsync("loadRevealView", "revealView", e.Value!.ToString());
-	    }
-	}
-	```
+```c
+async void selectedDashboardChanged(ChangeEventArgs e)
+    {
+        await JSRuntime.InvokeVoidAsync("loadRevealView", "revealView", e.Value!.ToString());
+    }
+}
+```
 
 ### Step 9 - Run Your Application 
 At this point, all the steps are completed to enable powerful BI features in your Blazor application.  Run your application to see the results!
