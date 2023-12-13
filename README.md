@@ -8,8 +8,22 @@ This example uses a Reveal server that is already set up and running in the clou
 
 Follow the step-by-step at this URL to get started: [https://help.revealbi.io/en/web/installation.html](https://help.revealbi.io/en/web/installation.html)
 
+
 ### Step 2 - Create a Blazor Server App
 Since this is a Blazor Server app, you should create a Blazor Server app with the defaults.  Once completed, follow the steps below to get Reveal running in your app.
+
+
+## Step 2 - Add Reveal SDK
+
+1 - Right click the Solution, or Project, and select **Manage NuGet Packages** for Solution.
+
+![](images/getting-started-nuget-packages-manage.jpg)
+
+2 - In the package manager dialog, open the **Browse** tab, select the **Infragistics (Local)** package source, and install the **Reveal.Sdk.AspNetCore** NuGet package into the project.
+
+![](images/getting-started-nuget-packages-install.jpg)
+
+
 
 ### Step 3 - Set Up Folders / Add Dashboards
 To test the Reveal SDK client, we ship test dashboards.  Reveal uses a known folder structure to automatically load and save dashboards - if you use a folder named Dashboards in the root of your project, you are not required to write any additional Load / Save code.
@@ -50,19 +64,12 @@ Note that you'll create the revealview.js file in the next step.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://dl.revealbi.io/reveal/libs/1.5.0/infragistics.reveal.js"></script>
 
 <script type="module">
     import "./js/revealview.js";
 </script> 
-```
-
-Next, add the dependency for the CSS file for Quill.js in the <head> tag:
-
-```html
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" type="text/css" >  
 ```
 
 ### Step 6 - Add Reveal Client Configuration JavaScript 
@@ -105,7 +112,6 @@ In this Blazor application, you are going to load the dashboards into a `<div>` 
 ```html
 <select @onchange="selectedDashboardChanged">
     <option>Campaigns</option>
-    <option>Healthcare</option>
     <option>Manufacturing</option>
     <option>Marketing</option>
     <option>Sales</option>
