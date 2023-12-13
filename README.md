@@ -1,35 +1,60 @@
 # Using Reveal SDK in a Blazor Server Application
-This tutorial will walk you through building a Blazor Server or Blazor Web Assembly client to enable a self-service BI and Analytics experience in your Blazor app.
+This tutorial will walk you through building a Blazor Server application to enable a self-service BI and Analytics experience in your Blazor app.
+
 ## 8 Steps to Dashboards
-The following 8 steps will show you how easy it is to get started with enabling rich data visualizations and dashboards in your Blazor application. There are both client and server configuration that needs to happen.  As Blazor Server is a single project in Visual Studio, we’ll add code to both to get the application up and running.
+The following 8 steps will show you how easy it is to enable rich data visualizations and dashboards in your Blazor applications. As Blazor Server is a single project in Visual Studio, we’ll add code for the Server and the Client to get the application up and running.
 
-### Step 1 - Download & Install the Reveal SDK
-This example uses a Reveal server that is already set up and running in the cloud, there is no need to download and install anything to complete this tutorial.  To set up your own Reveal SDK server, you first have to download and install the Reveal SDK installer from the Reveal website.
+There is no need to download and install anything to complete this tutorial.  However, you will need a trial license to complete this tutorial.  To get a trial license, go to this URL: 
 
-Follow the step-by-step at this URL to get started: [https://help.revealbi.io/en/web/installation.html](https://help.revealbi.io/en/web/installation.html)
+[https://help.revealbi.io/web/adding-license-key](https://help.revealbi.io/web/adding-license-key)
 
-### Step 2 - Create a Blazor Server App
+In Step 4 of this tutorial, you'll add the llicense key that was emailed to you as part of the process you followed after reading the help topic.
+
+### Step 1 - Create a Blazor Server App
 Since this is a Blazor Server app, you should create a Blazor Server app with the defaults.  Once completed, follow the steps below to get Reveal running in your app.
+
+### Step 2 - Add Reveal SDK Nuget Package
+
+1 - Right click the Solution, or Project, and select **Manage NuGet Packages** for Solution.
+
+<img width="409" alt="image" src="https://github.com/RevealBi/sdk-samples-blazor/assets/18453092/763805d6-3656-48a7-8d20-75384f670e72">
+
+2 - In the package manager dialog, open the **Browse** tab, select the **nuget.org** package source, and install the Latest Stable **Reveal.Sdk.AspNetCore** NuGet package into the project.
+
+<img width="1104" alt="image" src="https://github.com/RevealBi/sdk-samples-blazor/assets/18453092/7f7aba3d-03df-4e3e-8bc9-309c9dd01034">
 
 ### Step 3 - Set Up Folders / Add Dashboards
 To test the Reveal SDK client, we ship test dashboards.  Reveal uses a known folder structure to automatically load and save dashboards - if you use a folder named Dashboards in the root of your project, you are not required to write any additional Load / Save code.
 
 1. Create a folder named `Dashboards`
-2. Copy the sample dashboards (Marketing, Sales, Campaigns, Manufacturing) to that folder from one of these locations:
-	1. `%public documents%\Infragistics\Reveal\SDK\Web\Sample\Reveal.Sdk.Samples.Web.UpMedia\Dashboards`
-	2. [https://users.infragistics.com/Reveal/sample-dashboards.zip](https://users.infragistics.com/Reveal/sample-dashboards.zip)
+2. Download this zip file [https://users.infragistics.com/Reveal/sample-dashboards.zip](https://users.infragistics.com/Reveal/sample-dashboards.zip) and copy the unzipped files to your newly created dashboards folder.
+
+Note that the .RDASH file extension is simply a .ZIP file, renamed to .RDASH.  In this zip file, we store the JSON definition of the dashboard.
 
 ### Step 4 - Update Program.cs
 In `Program.cs`:
 
 1. Add to the top of the code window:
-```
+```c
 using Reveal.Sdk;
 ```
 
 3. Tell your app to use the Reveal SDK with this code, make sure to place it before the `builder.build` statement.
-```
+```c
  builder.Services.AddControllers().AddReveal();
+```
+
+If you are adding the license key in code, and not using the file system, then you'd modify the above code to include your license key:
+
+```c
+builder.Services.AddControllers().AddReveal(builder =>
+{
+    builder
+    .AddSettings(settings =>
+    {
+        settings.License = "<paste your license key>";
+    });
+});
 ```
 
 5. Add the following for correct routing before the `app.run` at the bottom of the `Program.cs`
@@ -50,19 +75,12 @@ Note that you'll create the revealview.js file in the next step.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-<script src="https://dl.revealbi.io/reveal/libs/1.5.0/infragistics.reveal.js"></script>
+<script src="https://dl.revealbi.io/reveal/libs/1.6.1/infragistics.reveal.js"></script>
 
 <script type="module">
     import "./js/revealview.js";
 </script> 
-```
-
-Next, add the dependency for the CSS file for Quill.js in the <head> tag:
-
-```html
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" type="text/css" >  
 ```
 
 ### Step 6 - Add Reveal Client Configuration JavaScript 
@@ -92,7 +110,7 @@ window.loadRevealView = function (viewId, dashboardName) {
 }
 ```
 
-### Step 8 - Load Dashboards 
+### Step 7 - Load Dashboards 
 In this Blazor application, you are going to load the dashboards into a `<div>` named ` revealView`.  Follow these steps to load the sample dashboards from the `Dashboards` folder in your application.
 
 1. In `Pages\Index.Razor`, add this using statement:
@@ -105,7 +123,6 @@ In this Blazor application, you are going to load the dashboards into a `<div>` 
 ```html
 <select @onchange="selectedDashboardChanged">
     <option>Campaigns</option>
-    <option>Healthcare</option>
     <option>Manufacturing</option>
     <option>Marketing</option>
     <option>Sales</option>
@@ -138,5 +155,5 @@ async void selectedDashboardChanged(ChangeEventArgs e)
 }
 ```
 
-### Step 9 - Run Your Application 
+### Step 8 - Run Your Application 
 At this point, all the steps are completed to enable powerful BI features in your Blazor application.  Run your application to see the results!
