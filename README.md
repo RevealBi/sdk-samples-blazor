@@ -26,7 +26,7 @@ Since this is a Blazor Server app, you should create a Blazor Server app with th
 ### Step 3 - Set Up Folders / Add Dashboards
 To test the Reveal SDK client, we ship test dashboards.  Reveal uses a known folder structure to automatically load and save dashboards - if you use a folder named Dashboards in the root of your project, you are not required to write any additional Load / Save code.
 
-1. Create a folder named `Dashboards`
+1. Create a folder named `Dashboards` in the root of your solution.
 2. Download this zip file [https://users.infragistics.com/Reveal/sample-dashboards.zip](https://users.infragistics.com/Reveal/sample-dashboards.zip) and copy the unzipped files to your newly created dashboards folder.
 
 Note that the .RDASH file extension is simply a .ZIP file, renamed to .RDASH.  In this zip file, we store the JSON definition of the dashboard.
