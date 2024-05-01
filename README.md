@@ -145,7 +145,7 @@ If you are using a .NET 8 Blazor Server template, add the correct render mode to
 
 3. Add the revealView div:
 ```html
-<div id="revealView" style="height: calc(100vh - 30px); width: 100%; position:relative;" ></div>
+<div id="revealView" style="height: calc(100vh - 200px); width: 100%; position:relative;" ></div>
 ```
 
 4. Add code that loads the Campaigns dashboard on first load
@@ -171,3 +171,6 @@ async void selectedDashboardChanged(ChangeEventArgs e)
 
 ### Step 8 - Run Your Application 
 At this point, all the steps are completed to enable powerful BI features in your Blazor application.  Run your application to see the results!
+
+![image](https://github.com/RevealBi/sdk-samples-blazor/assets/18453092/b0f3f174-1108-4c20-92c9-c7baa0aa6dbd)
+
