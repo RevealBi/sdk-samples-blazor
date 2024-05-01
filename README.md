@@ -68,6 +68,12 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
+6.  If you are using a .NET 8 Blazor Server template, add the following between the app.UseHttpsRedirection and app.UseAntiForgery:
+```c
+app.UseRouting();
+```
+It is important that App.UseRouting is placed in the correct order so the middleware execution occurs in the correct order.
+
 ### Step 5 - Add Client SDK Dependencies
 To enable Reveal client JavaScript dependencies, the `Pages\_layout.cshtml` file needs to be updated. Add the following code before the end of the closing `</Body>` tag.  If you started with a Blazor Server app, you would add this to the index.html file in wwwroot folder.
 
@@ -120,6 +126,12 @@ In this Blazor application, you are going to load the dashboards into a `<div>` 
 ```html
 @inject IJSRuntime JSRuntime
 ```
+
+If you are using a .NET 8 Blazor Server template, add the correct render mode to the top of the page as well:
+```html
+@rendermode InteractiveServer
+```
+
 
 2. Add the code for the dropdown that you’ll use to selected the dashboard to load:
 ```html
