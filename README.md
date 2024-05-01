@@ -115,7 +115,7 @@ window.loadRevealView = function (viewId, dashboardName) {
 ### Step 7 - Load Dashboards 
 In this Blazor application, you are going to load the dashboards into a `<div>` named ` revealView`.  Follow these steps to load the sample dashboards from the `Dashboards` folder in your application.
 
-1. In `Pages\Index.Razor`, add this using statement:
+1. In `Pages\Index.Razor`, add this using statement (Note: This has changed in a .NET 8 Blazor Server app to `Pages\Home.razor`.)
 
 ```html
 @inject IJSRuntime JSRuntime
