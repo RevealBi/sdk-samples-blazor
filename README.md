@@ -71,6 +71,8 @@ app.UseEndpoints(endpoints =>
 ### Step 5 - Add Client SDK Dependencies
 To enable Reveal client JavaScript dependencies, the `Pages\_layout.cshtml` file needs to be updated. Add the following code before the end of the closing `</Body>` tag.  If you started with a Blazor Server app, you would add this to the index.html file in wwwroot folder.
 
+Note: This has changed in a .NET 8 Blazor Server app. If you are using .NET 8 project templates, the Components\App.razor needs to be updated.
+
 Note that you'll create the revealview.js file in the next step.
 
 ```html
