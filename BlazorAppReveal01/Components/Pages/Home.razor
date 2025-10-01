@@ -1,0 +1,32 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, Blazor!</h1>
+<p></p>
+<select @onchange="selectedDashboardChanged">
+    <option>Campaigns</option>
+    <option>Manufacturing</option>
+    <option>Marketing</option>
+    <option>Sales</option>
+</select>
+<p></p>
+<div id="revealView" style="height: calc(100vh - 200px); width: 100%; position:relative;"></div>
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("loadRevealView", "revealView", "Campaigns");
+        }
+    }
+
+    private async Task selectedDashboardChanged(ChangeEventArgs e)
+    {
+        await JSRuntime.InvokeVoidAsync("loadRevealView", "revealView", e.Value!.ToString());
+    }
+}

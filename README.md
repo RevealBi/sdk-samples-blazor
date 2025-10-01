@@ -57,15 +57,10 @@ builder.Services.AddControllers().AddReveal(builder =>
 });
 ```
 
-5. Add the following for correct routing before the `app.run` at the bottom of the `Program.cs`
+5. Add the following to map the controllers before the `app.run` at the bottom of the `Program.cs`
 ```c
 // Required for Reveal
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+app.MapControllers();
 ```
 
 6.  If you are using a .NET 8 Blazor Server template, add the following between the app.UseHttpsRedirection and app.UseAntiForgery:
