@@ -1,6 +1,10 @@
 # Using Reveal SDK in a Blazor Server Application
 This tutorial will walk you through building a Blazor Server application to enable a self-service BI and Analytics experience in your Blazor app.
 
+Step-by-step tutorial on YouTube:
+
+https://youtu.be/YvtlkSOz9to 
+
 ## 8 Steps to Dashboards
 The following 8 steps will show you how easy it is to enable rich data visualizations and dashboards in your Blazor applications. As Blazor Server is a single project in Visual Studio, we’ll add code for the Server and the Client to get the application up and running.
 
